@@ -1,12 +1,28 @@
-# React + Vite
+# Sachiin's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hey! I'm **Sachiin**, an AI & Full Stack developer from Coimbatore, and this is my personal portfolio site — built using **React + Vite**. It's a space where I showcase the projects I've built, the skills I'm sharpening, and the tech I vibe with. 
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+-  **Vite** – lightning-fast bundler
+-  **React** – frontend library
+-  **Tailwind CSS** – for clean, minimal design
+-  **GSAP** – for smooth scroll-triggered animations
+-  **Google Fonts** – Poppins, Fjalla One
+-  **Deployed on** [Vercel](https://vercel.com)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+##  Features
+
+-  Interactive sections & responsive design
+-  Mobile-first layout
+-  Clean project showcase
+-  Scroll animations with GSAP
+-  Personal bio, contact info, and more
+
+---
+
+
