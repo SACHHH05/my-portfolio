@@ -1,0 +1,66 @@
+.about {
+  padding: 6rem 2rem;
+  background-color: #000000;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  height: auto;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapper {
+  margin-left: 10vw;
+  max-width: 800px;
+  animation: fadeIn 1s ease-in;
+}
+
+.fullname {
+  font-size: 3rem;
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  position: relative;
+  font-family: 'Fjalla One',
+}
+
+.description {
+  color: #c2c2c2;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  opacity: 0; /* will animate via GSAP */
+  transform: translateY(50px);
+}
+
+@media (max-width: 768px) {
+  .fullname {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .wrapper {
+    margin-left: 5vw;
+  }
+  
+}
+
+/* Optional fade-in for wrapper if you want a backup for users without JS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}

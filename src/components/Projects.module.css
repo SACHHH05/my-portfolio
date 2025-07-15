@@ -1,0 +1,109 @@
+.projects {
+  padding: 6rem 2rem;
+  background-color: #000000;
+  color:	#ffffff;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Flip Card Container */
+.flipCard {
+  background-color: transparent;
+  width: 100%;
+  height: 220px;
+  perspective: 1000px;
+}
+
+.flipInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  
+}
+
+.flipCard:hover .flipInner {
+  transform: rotateY(180deg);
+  box-shadow: 0 0 20px #FF61A6;
+}
+
+.flipFront, .flipBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  padding: 1.5rem;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flipFront {
+  background-color: #111;
+  border: 1px solid #2a2a2a;
+}
+
+.flipBack {
+  background-color: #111;
+  transform: rotateY(180deg);
+  border: 1px solid #444;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: #cccccc;
+  line-height: 1.5;
+}
+
+.icon {
+  font-size: 5rem;
+  color: #6c6c6c;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flipCard {
+    height: 250px;
+  }
+  .linkWrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+}

@@ -1,0 +1,62 @@
+.expertise {
+  padding: 6rem 2rem;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: left;
+}
+
+.heading {
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.caption {
+  font-size: 1rem;
+  color: #c2c2c2;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.block {
+  margin-bottom: 3rem;
+  margin-left: 10vw;
+}
+
+.subheading {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skillItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #111;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #c2c2c2;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.skillItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px #FF61A6;
+}
+
+.icon {
+  font-size: 2rem;
+  color: #6c6c6c;
+}
