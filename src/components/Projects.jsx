@@ -1,5 +1,5 @@
 import styles from './Projects.module.css';
-import { FaPython, FaReact } from 'react-icons/fa';
+import { FaPython, FaReact, FaUserAlt } from 'react-icons/fa';
 import { SiFlask, SiOpencv, SiScikitlearn } from 'react-icons/si';
 
 const projects = [
@@ -38,6 +38,12 @@ const projects = [
     description: "Detects fraud/phishing emails using ML models.",
     icon: <SiScikitlearn />,
     github: "https://github.com/SACHHH05/Fraud-Email-Detection",
+  },
+  {
+    title: "Portfolio",
+    description: "The website you're seeing! Built with React, GSAP & Vite, deployed on Vercel.",
+    icon: <FaReact/>,
+    github: "https://github.com/SACHHH05/my-portfolio", 
   },
 ];
 
