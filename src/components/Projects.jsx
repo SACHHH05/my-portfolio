@@ -45,6 +45,12 @@ const projects = [
     icon: <FaReact/>,
     github: "https://github.com/SACHHH05/my-portfolio", 
   },
+   {
+    title: "VISYRE",
+    description: "Extracts text from images using OpenCV and EasyOCR in Python.",
+    icon: <SiOpencv />, // use OpenCV icon
+    github: "https://github.com/SACHHH05/Visyre", // your repo link
+  },
 ];
 
 export default function Projects() {

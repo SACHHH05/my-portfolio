@@ -7,7 +7,7 @@ export default function Experience() {
 
       <div className={styles.grid}>
         <div className={styles.card}>
-          <div className={styles.date}>May 2025 – July 2025</div>
+          <div className={styles.date}>July 2025 (1 month)</div>
           <h3 className={styles.title}>Intern @ Zettaone Technologies</h3>
           <p className={styles.desc}>
             Worked on real-world AI applications, learned production-level development

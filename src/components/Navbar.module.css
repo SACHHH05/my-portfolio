@@ -10,10 +10,11 @@
   z-index: 100;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #000000;
+.logo img {
+  width: 50px;       /* Adjust as needed */
+  height: 50px;      /* Adjust as needed */
+  object-fit: contain;
+  display: block;
 }
 
 .navLinks {
@@ -24,11 +25,24 @@
 
 .navLinks li a {
   text-decoration: none;
-  color: #ffffff;
+  color: #F2E6DC;
   font-weight: 500;
   transition: 0.3s;
 }
 
 .navLinks li a:hover {
-  color: #ff3c87;
+  color: #565449;
+}
+
+/* Resume button */
+.resumeLink {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #F2E6DC;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.resumeLink:hover {
+  background-color: #F2E6DC;
+  color: #000000;
 }

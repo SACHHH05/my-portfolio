@@ -1,14 +1,14 @@
 .contact {
-  padding: 6rem 2rem;
+  padding: 1rem 1rem;
   background-color: #000000;
   color: #ffffff;
   text-align: center;
 }
 
 .heading {
-  font-size: 2.5rem;
-  margin-bottom: 5rem;
-  color: #ffffff;
+  font-size: 3.2rem;
+  margin-bottom: 2rem;
+  color: #F2E6DC;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -30,8 +30,8 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background-color: #111111;
-  color: #6c6c6c;
+  background-color:#050504;
+  color: #F2E6DC;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -43,9 +43,10 @@
 .button:hover {
   color: #6c6c6c;
   transform: translateY(-2px);
-  box-shadow: 0 0 10px #FF61A6;
+  box-shadow: 0 0 10px #F2E6DC;
 }
 
 .icon {
   font-size: 1.2rem;
+  color:#565449;
 }

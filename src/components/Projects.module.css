@@ -1,12 +1,13 @@
 .projects {
-  padding: 6rem 2rem;
+  padding: 9rem 5rem;
   background-color: #000000;
-  color:	#ffffff;
+  color: #ffffff;
   text-align: center;
 }
 
 .heading {
-  font-size: 2.5rem;
+  font-size: 5rem;
+  color: #F2E6DC;
   margin-bottom: 4rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -34,15 +35,16 @@
   height: 100%;
   transition: transform 0.8s ease;
   transform-style: preserve-3d;
-  
 }
 
 .flipCard:hover .flipInner {
   transform: rotateY(180deg);
-  box-shadow: 0 0 20px #FF61A6;
+  box-shadow: 0 0 20px #F2E6DC;
 }
 
-.flipFront, .flipBack {
+/* Front and back sides */
+.flipFront,
+.flipBack {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -53,35 +55,56 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .flipFront {
-  background-color: #111;
-  border: 1px solid #2a2a2a;
+  background-color: #050504;
+  border: 1px solid #050504;
 }
 
 .flipBack {
-  background-color: #111;
+  background-color: #050504;
   transform: rotateY(180deg);
-  border: 1px solid #444;
+  border: 1px solid #050504;
+  justify-content: center; /* centers content vertically */
+  align-items: center;     /* centers content horizontally */
 }
 
+/* Title and description */
 .title {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #565449;
   margin-bottom: 0.5rem;
+}
+
+.flipBack .title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
 }
 
 .description {
   font-size: 1rem;
-  color: #cccccc;
+  color: #D8CFBC;
   line-height: 1.5;
 }
 
+/* Icon on back */
 .icon {
   font-size: 5rem;
-  color: #6c6c6c;
+  color: #5d564d;
+}
+
+/* Link wrapper */
+.linkWrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
 }
 
 /* Responsive */
@@ -99,11 +122,4 @@
   .flipCard {
     height: 250px;
   }
-  .linkWrapper {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  cursor: pointer;
-}
-
 }

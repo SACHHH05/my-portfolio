@@ -5,62 +5,87 @@
   justify-content: flex-start;
   align-items: center;
   text-align: left;
-  height: auto;
   min-height: 100vh;
-  position: relative;
   overflow: hidden;
 }
 
 .wrapper {
+  max-width: 1200px;
   margin-left: 10vw;
-  max-width: 800px;
-  animation: fadeIn 1s ease-in;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+
+.text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.imageContainer {
+  flex: 0 0 350px;
+  margin-left: 10rem; /* pushes the image slightly to the right */
+}
+
+
+.profileImage {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .fullname {
-  font-size: 3rem;
-  color: #ffffff;
+  font-size: 5rem;
+  color: #F2E6DC;
   font-weight: 800;
   letter-spacing: 2px;
-  text-transform: uppercase;
   margin-bottom: 2rem;
-  position: relative;
-  font-family: 'Fjalla One',
+  text-transform: uppercase;
+  font-family: 'Fjalla One', sans-serif;
 }
 
 .description {
-  color: #c2c2c2;
-  font-size: 1.1rem;
+  color: #757575;
+  font-size: 1.2rem;
   line-height: 1.8;
   margin-bottom: 1.2rem;
-  opacity: 0; /* will animate via GSAP */
-  transform: translateY(50px);
 }
 
-@media (max-width: 768px) {
-  .fullname {
-    font-size: 2rem;
-  }
+/* Optional fade-in for non-JS users */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  .description {
-    font-size: 1rem;
+/* Responsive */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
   }
 
   .wrapper {
     margin-left: 5vw;
   }
-  
-}
 
-/* Optional fade-in for wrapper if you want a backup for users without JS */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  .fullname {
+    font-size: 2rem;
+    text-align: center;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .description {
+    font-size: 1rem;
+    text-align: center;
   }
-  
+
+  .imageContainer {
+    width: 300px;
+    margin-bottom: 2rem;
+  }
 }

@@ -1,6 +1,6 @@
 .hero {
   height: 100vh;
-  background-color: #000;
+  background-color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,14 +13,14 @@
 }
 
 .name {
-  font-size: 7rem;
-  color: #ffffff;
+  font-size: 10rem;
+  color: #F2E6DC;
   font-weight: 1000;
   letter-spacing: 2px;
   text-transform: uppercase;
   will-change: transform, opacity;
   transition: all 0.3s ease;
-  font-family: 'Fjalla One',
+  font-family: 'BebasNeue',
 }
 
 @media (max-width: 768px) {

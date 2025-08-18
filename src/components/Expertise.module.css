@@ -6,8 +6,8 @@
 }
 
 .heading {
-  font-size: 2.5rem;
-  color: #ffffff;
+  font-size: 5rem;
+  color: #F2E6DC;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 0.5rem;
@@ -16,7 +16,7 @@
 
 .caption {
   font-size: 1rem;
-  color: #c2c2c2;
+  color: #F2E6DC;
   margin-bottom: 3rem;
   text-align: center;
 }
@@ -29,7 +29,7 @@
 .subheading {
   font-size: 1.4rem;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: #F2E6DC;
 }
 
 .row {
@@ -42,21 +42,21 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background-color: #111;
+  background-color: #050504;
   padding: 0.6rem 1rem;
   border-radius: 8px;
   font-size: 1rem;
-  color: #c2c2c2;
+  color: #D8CFBC;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
 .skillItem:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 20px #FF61A6;
+  box-shadow: 0 0 20px #F2E6DC;
 }
 
 .icon {
   font-size: 2rem;
-  color: #6c6c6c;
+  color: #565449;
 }
