@@ -41,13 +41,13 @@
 }
 
 .fullname {
-  font-size: 5rem;
+  font-size: 9rem;
   color: #F2E6DC;
   font-weight: 800;
   letter-spacing: 2px;
   margin-bottom: 2rem;
   text-transform: uppercase;
-  font-family: 'Fjalla One', sans-serif;
+  font-family: 'BebasNeue';
 }
 
 .description {
