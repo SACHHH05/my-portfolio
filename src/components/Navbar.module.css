@@ -1,48 +1,102 @@
+/* ================= NAVBAR ================= */
+
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  background-color: #000000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
+  background-color: #000000;
+  padding: 1.2rem 2rem;
 }
 
-.logo img {
-  width: 50px;       /* Adjust as needed */
-  height: 50px;      /* Adjust as needed */
-  object-fit: contain;
-  display: block;
-}
-
+/* Nav container */
 .navLinks {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
 }
 
+/* ================= NORMAL LINKS ================= */
+
 .navLinks li a {
+  position: relative;
   text-decoration: none;
   color: #F2E6DC;
   font-weight: 500;
-  transition: 0.3s;
+  transition: color 0.3s ease;
 }
 
 .navLinks li a:hover {
   color: #565449;
 }
 
-/* Resume button */
-.resumeLink {
-  padding: 0.4rem 0.8rem;
-  border: 1px solid #F2E6DC;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+/* ================= CENTER NAME ================= */
+
+.centerLogo {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #F2E6DC;
+  cursor: pointer;
+  font-family: 'Comforter', cursive;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.centerLogo:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+
+/* ================= RESUME (ACTS LIKE NORMAL LINKS) ================= */
+
+/* ================= RESUME (PERFECTLY ALIGNED) ================= */
+
+.resumeLink {
+  display: inline-flex;
+  align-items: center;      /* 🔥 vertical alignment fix */
+  justify-content: center;
+  color: #F2E6DC;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  height: 1.4em;            /* matches text height */
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+/* Text + icon */
+.resumeText,
+.downloadIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Default */
+.resumeText {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.downloadIcon {
+  opacity: 0;
+  transform: translateY(-8px);
+  position: absolute;
+}
+
+/* Hover */
 .resumeLink:hover {
-  background-color: #F2E6DC;
-  color: #000000;
+  color: #565449;
+}
+
+.resumeLink:hover .resumeText {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.resumeLink:hover .downloadIcon {
+  opacity: 1;
+  transform: translateY(0);
 }

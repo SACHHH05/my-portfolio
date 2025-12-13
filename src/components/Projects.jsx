@@ -1,6 +1,7 @@
+import { useEffect, useRef } from 'react';
 import styles from './Projects.module.css';
-import { FaPython, FaReact, FaUserAlt } from 'react-icons/fa';
-import { SiFlask, SiOpencv, SiScikitlearn } from 'react-icons/si';
+import { FaPython, FaReact, FaGithub } from 'react-icons/fa';
+import { SiOpencv, SiScikitlearn } from 'react-icons/si';
 
 const projects = [
   {
@@ -41,22 +42,83 @@ const projects = [
   },
   {
     title: "Portfolio",
-    description: "The website you're seeing! Built with React, GSAP & Vite, deployed on Vercel.",
-    icon: <FaReact/>,
-    github: "https://github.com/SACHHH05/my-portfolio", 
+    description: "The website you're seeing! Built with React, GSAP & Vite.",
+    icon: <FaReact />,
+    github: "https://github.com/SACHHH05/my-portfolio",
   },
-   {
+  {
     title: "VISYRE",
-    description: "Extracts text from images using OpenCV and EasyOCR in Python.",
-    icon: <SiOpencv />, // use OpenCV icon
-    github: "https://github.com/SACHHH05/Visyre", // your repo link
+    description: "Extracts text from images using OpenCV and EasyOCR.",
+    icon: <SiOpencv />,
+    github: "https://github.com/SACHHH05/Visyre",
   },
 ];
 
 export default function Projects() {
+  const canvasRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    /* ===== PIXEL BACKGROUND ===== */
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    const resize = () => {
+      canvas.width = sectionRef.current.offsetWidth;
+      canvas.height = sectionRef.current.offsetHeight;
+    };
+
+    resize();
+
+    const pixels = [];
+    const pixelCount = 140;
+
+    for (let i = 0; i < pixelCount; i++) {
+      pixels.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speed: Math.random() * 0.4 + 0.2,
+        alpha: Math.random() * 0.5 + 0.2,
+        dx: (Math.random() - 0.5) * 0.25,
+      });
+    }
+
+    let anim;
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      pixels.forEach(p => {
+        p.y -= p.speed;
+        p.x += p.dx;
+
+        if (p.y < 0) p.y = canvas.height;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+
+        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+      });
+
+      anim = requestAnimationFrame(animate);
+    };
+
+    animate();
+    window.addEventListener('resize', resize);
+
+    return () => {
+      cancelAnimationFrame(anim);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+
   return (
-    <section id="projects" className={styles.projects}>
+    <section id="projects" className={styles.projects} ref={sectionRef}>
+      {/* Pixel Background */}
+      <canvas ref={canvasRef} className={styles.pixelCanvas} />
+
       <h2 className={styles.heading}>Projects</h2>
+
       <div className={styles.grid}>
         {projects.map((project, index) => (
           <a
@@ -68,14 +130,16 @@ export default function Projects() {
           >
             <div className={styles.flipCard}>
               <div className={styles.flipInner}>
-                {/* Front side */}
                 <div className={styles.flipFront}>
                   <h3 className={styles.title}>{project.title}</h3>
                   <p className={styles.description}>{project.description}</p>
                 </div>
-                {/* Back side */}
+
                 <div className={styles.flipBack}>
                   <div className={styles.icon}>{project.icon}</div>
+                  <div className={styles.githubIcon}>
+                    <FaGithub />
+                  </div>
                 </div>
               </div>
             </div>

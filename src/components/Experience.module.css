@@ -1,8 +1,26 @@
 .experience {
+  position: relative;          /* REQUIRED */
   padding: 6rem 2rem;
   background-color: #000000;
-  color:#ffffff;
+  color: #ffffff;
   text-align: center;
+  overflow: hidden;
+}
+
+/* Pixel background */
+.pixelCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Keep content above pixels */
+.heading,
+.grid {
+  position: relative;
+  z-index: 1;
 }
 
 .heading {
@@ -22,7 +40,7 @@
 }
 
 .card {
-  background-color:#050504;
+  background-color: #050504;
   border-radius: 12px;
   padding: 2rem;
   max-width: 400px;
@@ -33,7 +51,7 @@
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 20px #F2E6DC;
+  box-shadow: 0 10px 25px rgba(242, 230, 220, 0.15);
 }
 
 .date {
