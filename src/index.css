@@ -4,19 +4,6 @@
   font-weight: 400;
   font-style: normal;
 }
-
-@font-face {
-  font-family: 'Aladin';
-  src: url('/fonts/Aladin-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'bokor';
-  src: url('/fonts/Bokor-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
 @font-face {
   font-family: 'Comforter';
   src: url('/fonts/Comforter-Regular.ttf') format('truetype');
