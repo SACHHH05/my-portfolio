@@ -1,13 +1,13 @@
+/* ================= SECTION ================= */
+
 .experience {
-  position: relative;          /* REQUIRED */
-  padding: 6rem 2rem;
+  position: relative;
+  padding: 4rem 5rem 2rem;
   background-color: #000000;
   color: #ffffff;
-  text-align: center;
   overflow: hidden;
 }
 
-/* Pixel background */
 .pixelCanvas {
   position: absolute;
   inset: 0;
@@ -16,76 +16,191 @@
   opacity: 0.4;
 }
 
-/* Keep content above pixels */
-.heading,
-.grid {
+.inner {
   position: relative;
   z-index: 1;
+  width: 100%;
 }
+
+/* ================= HEADING ================= */
 
 .heading {
   font-size: 5rem;
   color: #F2E6DC;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 4rem;
+.headingEdu {
+  margin-top: 8rem;
 }
 
-.card {
-  background-color: #050504;
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 400px;
+/* ================= TIMELINE ================= */
+
+.timeline {
+  display: grid;
+  grid-template-columns: 48px 1fr;
   width: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(242, 230, 220, 0.15);
+/* ================= LINE TRACK ================= */
+
+.lineTrack {
+  position: relative;
+  width: 48px;
 }
 
-.date {
-  font-size: 0.95rem;
-  color: #757575;
+.timelineLine {
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #1a1a16;
 }
 
-.title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 0.8rem;
+.activeDot {
+  position: absolute;
+  left: 15px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #D8CFBC;
+  border: 2px solid #000;
+  box-shadow: 0 0 12px rgba(216, 207, 188, 0.6), 0 0 24px rgba(216, 207, 188, 0.2);
+  transition: top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+/* ================= ROWS ================= */
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= ENTRY ================= */
+
+.entry {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: start;
+  padding: 2.8rem 0 2.8rem 2rem;
+  border-bottom: 1px solid #0f0f0d;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.entry::before {
+  content: '';
+  position: absolute;
+  left: -5rem;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #080806;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.entryActive::before {
+  opacity: 1;
+}
+
+/* ================= LEFT ================= */
+
+.entryLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 6px;
+}
+
+.entryDate {
+  font-size: 1.25rem;
+  color: #565449;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+}
+
+.entryActive .entryDate {
+  color: #D8CFBC;
+}
+
+.entryDuration {
+  font-size: 1.25rem;
+  color: #2e2d28;
+  letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+}
+
+.entryActive .entryDuration {
   color: #565449;
 }
 
-.desc {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #D8CFBC;
-  margin-bottom: 0.5rem;
-}
+/* ================= RIGHT ================= */
 
-.eduRow {
+.entryRight {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: #cccccc;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.location {
-  text-align: right;
-  flex: 1;
-  color: #757575;
+.entryRole {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2e2d28;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+  transform: scale(0.95);
+  transform-origin: left center;
+  transition: color 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1), font-size 0.35s ease;
+}
+
+.entryActive .entryRole {
+  font-size: 2.2rem;
+  color: #F2E6DC;
+  transform: scale(1);
+}
+
+.entryCompany {
+  font-size: 1.35rem;
+  color: #2e2d28;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.entryActive .entryCompany {
+  color: #565449;
+}
+
+.entryDesc {
+  font-size: 0.9rem;
+  color: #8c8472;
+  line-height: 1.75;
+  margin-top: 0.75rem;
+  max-width: 620px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .experience { padding: 4rem 1.5rem 6rem; }
+  .heading { font-size: 3rem; }
+  .timeline { grid-template-columns: 28px 1fr; }
+  .lineTrack { width: 28px; }
+  .timelineLine { left: 13px; }
+  .activeDot { left: 6px; width: 14px; height: 14px; }
+  .entry { grid-template-columns: 1fr; padding: 2rem 0 2rem 1rem; }
+  .entryLeft { padding-top: 0; }
 }

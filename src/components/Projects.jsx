@@ -1,79 +1,85 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { FaGithub, FaReact } from 'react-icons/fa';
+import { SiOpencv, SiAngular } from 'react-icons/si';
 import styles from './Projects.module.css';
-import { FaPython, FaReact, FaGithub } from 'react-icons/fa';
-import { SiOpencv, SiScikitlearn } from 'react-icons/si';
+
+import clomoraImg from '../assets/climora.png';
+import morpheusImg from '../assets/Morpheus.png';
+import portImg from '../assets/port.png';
+import voiceImg from '../assets/voice.png';
+import visyreImg from '../assets/visyre.png';
 
 const projects = [
   {
-    title: "Periodontal Disease Detector",
-    description: "AI tool that detects early-stage gum disease using image classification.",
-    icon: <FaPython />,
-    github: "https://github.com/SACHHH05/Periodontal-Disease-Prediction",
+    id: 1,
+    number: '01',
+    title: 'Morpheus',
+    type: 'AI · 3D Generation',
+    tech: ['React', 'FastAPI', 'Claude API', 'Blender bpy'],
+    github: 'https://github.com/SACHHH05/Morpheus',
+    cover: morpheusImg,
   },
   {
-    title: "Climora",
-    description: "Weather + soil insights with Flask and React Native.",
-    icon: <FaReact />,
-    github: "https://github.com/SACHHH05/CLIMORA",
+    id: 2,
+    number: '02',
+    title: 'Voice Transcription',
+    type: 'AI · Speech',
+    tech: ['Angular', 'Python', 'faster-whisper', 'Silero VAD'],
+    github: 'https://github.com/SACHHH05/Speech-to-text',
+    cover: voiceImg,
   },
   {
-    title: "AI Disease Detector",
-    description: "Predicts diseases based on symptoms using ML models.",
-    icon: <SiScikitlearn />,
-    github: "https://github.com/SACHHH05/AI-Disease-Detector",
+    id: 3,
+    number: '03',
+    title: 'Climora',
+    type: 'Mobile · Weather',
+    tech: ['React Native', 'Flask'],
+    github: 'https://github.com/SACHHH05/CLIMORA',
+    cover: clomoraImg,
   },
   {
-    title: "Colour Detection",
-    description: "Detects colors using OpenCV and Python.",
-    icon: <SiOpencv />,
-    github: "https://github.com/SACHHH05/Colour-Detection-",
+    id: 4,
+    number: '04',
+    title: 'VISYRE',
+    type: 'CV · OCR',
+    tech: ['Python', 'OpenCV', 'EasyOCR'],
+    github: 'https://github.com/SACHHH05/Visyre',
+    cover: visyreImg,
   },
   {
-    title: "SMS Spam Classifier",
-    description: "Classifies texts as spam/ham using NLP.",
-    icon: <FaPython />,
-    github: "https://github.com/SACHHH05/RD-INFRO-TECHNOLOY",
-  },
-  {
-    title: "Email Fraud Detection",
-    description: "Detects fraud/phishing emails using ML models.",
-    icon: <SiScikitlearn />,
-    github: "https://github.com/SACHHH05/Fraud-Email-Detection",
-  },
-  {
-    title: "Portfolio",
-    description: "The website you're seeing! Built with React, GSAP & Vite.",
-    icon: <FaReact />,
-    github: "https://github.com/SACHHH05/my-portfolio",
-  },
-  {
-    title: "VISYRE",
-    description: "Extracts text from images using OpenCV and EasyOCR.",
-    icon: <SiOpencv />,
-    github: "https://github.com/SACHHH05/Visyre",
+    id: 5,
+    number: '05',
+    title: 'Portfolio',
+    type: 'Web · Design',
+    tech: ['React', 'GSAP', 'Vite'],
+    github: 'https://github.com/SACHHH05/my-portfolio',
+    cover: portImg,
   },
 ];
+
+const PANEL_W = 440;
+const PANEL_H = 290;
+const OFFSET = 20;
 
 export default function Projects() {
   const canvasRef = useRef(null);
   const sectionRef = useRef(null);
+  const [hovered, setHovered] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const leaveTimer = useRef(null);
 
+  // Pixel background
   useEffect(() => {
-    /* ===== PIXEL BACKGROUND ===== */
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-
     const resize = () => {
       canvas.width = sectionRef.current.offsetWidth;
       canvas.height = sectionRef.current.offsetHeight;
     };
-
     resize();
-
     const pixels = [];
-    const pixelCount = 140;
-
-    for (let i = 0; i < pixelCount; i++) {
+    for (let i = 0; i < 140; i++) {
       pixels.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -83,69 +89,132 @@ export default function Projects() {
         dx: (Math.random() - 0.5) * 0.25,
       });
     }
-
     let anim;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       pixels.forEach(p => {
-        p.y -= p.speed;
-        p.x += p.dx;
-
+        p.y -= p.speed; p.x += p.dx;
         if (p.y < 0) p.y = canvas.height;
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
-
         ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
         ctx.fillRect(p.x, p.y, p.size, p.size);
       });
-
       anim = requestAnimationFrame(animate);
     };
-
     animate();
     window.addEventListener('resize', resize);
-
-    return () => {
-      cancelAnimationFrame(anim);
-      window.removeEventListener('resize', resize);
-    };
+    return () => { cancelAnimationFrame(anim); window.removeEventListener('resize', resize); };
   }, []);
+
+  const handleMouseMove = (e) => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const x = e.clientX + OFFSET + PANEL_W > vw
+      ? e.clientX - PANEL_W - OFFSET
+      : e.clientX + OFFSET;
+    const y = e.clientY + OFFSET + PANEL_H > vh
+      ? e.clientY - PANEL_H - OFFSET
+      : e.clientY + OFFSET;
+    setPos({ x, y });
+  };
+
+  const handleEnter = (index, e) => {
+    clearTimeout(leaveTimer.current);
+    setHovered(index);
+    setVisible(true);
+    handleMouseMove(e);
+  };
+
+  const handleLeave = () => {
+    leaveTimer.current = setTimeout(() => setVisible(false), 150);
+  };
+
+  const project = hovered !== null ? projects[hovered] : null;
+  const ghostNum = hovered !== null ? projects[hovered].number : projects[0].number;
 
   return (
     <section id="projects" className={styles.projects} ref={sectionRef}>
-      {/* Pixel Background */}
       <canvas ref={canvasRef} className={styles.pixelCanvas} />
 
-      <h2 className={styles.heading}>Projects</h2>
+      <div className={styles.inner}>
+        <h2 className={styles.heading}>Projects</h2>
 
-      <div className={styles.grid}>
-        {projects.map((project, index) => (
-          <a
-            key={index}
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.linkWrapper}
-          >
-            <div className={styles.flipCard}>
-              <div className={styles.flipInner}>
-                <div className={styles.flipFront}>
-                  <h3 className={styles.title}>{project.title}</h3>
-                  <p className={styles.description}>{project.description}</p>
-                </div>
+        {/* Ghost number watermark */}
+        <div className={styles.ghostNumber} key={ghostNum}>
+          {ghostNum}
+        </div>
 
-                <div className={styles.flipBack}>
-                  <div className={styles.icon}>{project.icon}</div>
-                  <div className={styles.githubIcon}>
-                    <FaGithub />
-                  </div>
-                </div>
+        <div className={styles.list}>
+          {/* header row */}
+          <div className={styles.listHeader}>
+            <span>No.</span>
+            <span>Project</span>
+            <span className={styles.headerRight}>Stack</span>
+          </div>
+
+          {projects.map((p, i) => (
+            <a
+              key={p.id}
+              href={p.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.row} ${hovered === i ? styles.rowActive : ''}`}
+              onMouseEnter={(e) => handleEnter(i, e)}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleLeave}
+            >
+              <span className={styles.rowNum}>{p.number}</span>
+
+              <div className={styles.rowCenter}>
+                <span className={styles.rowTitle}>{p.title}</span>
+                <span className={styles.rowType}>{p.type}</span>
               </div>
-            </div>
-          </a>
-        ))}
+
+              <div className={styles.rowRight}>
+                <div className={`${styles.techRow} ${hovered === i ? styles.techVisible : ''}`}>
+                  {p.tech.map(t => (
+                    <span key={t} className={styles.techPill}>{t}</span>
+                  ))}
+                </div>
+                <FaGithub className={styles.rowArrow} />
+              </div>
+            </a>
+          ))}
+
+          {/* More button */}
+          <div className={styles.moreWrap}>
+            <a
+              href="https://github.com/SACHHH05?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.moreBtn}
+            >
+              <span className={styles.moreBtnText}>More</span>
+              <span className={styles.moreBtnArrow}>→</span>
+            </a>
+          </div>
+        </div>
       </div>
+
+      {/* Cursor-following image panel */}
+      {project && (
+        <div
+          className={`${styles.panel} ${visible ? styles.panelVisible : ''}`}
+          style={{ left: pos.x, top: pos.y }}
+        >
+          <img
+            key={project.id}
+            src={project.cover}
+            alt={project.title}
+            className={styles.panelImg}
+          />
+          <div className={styles.panelLabel}>
+            <span className={styles.panelTitle}>{project.title}</span>
+            <span className={styles.panelType}>{project.type}</span>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

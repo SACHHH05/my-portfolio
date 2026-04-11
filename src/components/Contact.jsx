@@ -2,6 +2,24 @@ import { useEffect, useRef } from 'react';
 import styles from './Contact.module.css';
 import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
 
+const links = [
+  {
+    label: 'Gmail',
+    href: 'mailto:sachiin051@gmail.com',
+    icon: <FaEnvelope />,
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/sachiin-megarajan/',
+    icon: <FaLinkedin />,
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/SACHHH05',
+    icon: <FaGithub />,
+  },
+];
+
 export default function Contact() {
   const canvasRef = useRef(null);
   const sectionRef = useRef(null);
@@ -9,18 +27,13 @@ export default function Contact() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-
     const resize = () => {
       canvas.width = sectionRef.current.offsetWidth;
       canvas.height = sectionRef.current.offsetHeight;
     };
-
     resize();
-
     const pixels = [];
-    const pixelCount = 90;
-
-    for (let i = 0; i < pixelCount; i++) {
+    for (let i = 0; i < 90; i++) {
       pixels.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -30,76 +43,63 @@ export default function Contact() {
         dx: (Math.random() - 0.5) * 0.2,
       });
     }
-
     let anim;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       pixels.forEach(p => {
-        p.y -= p.speed;
-        p.x += p.dx;
-
+        p.y -= p.speed; p.x += p.dx;
         if (p.y < 0) p.y = canvas.height;
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
-
         ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
         ctx.fillRect(p.x, p.y, p.size, p.size);
       });
-
       anim = requestAnimationFrame(animate);
     };
-
     animate();
     window.addEventListener('resize', resize);
-
-    return () => {
-      cancelAnimationFrame(anim);
-      window.removeEventListener('resize', resize);
-    };
+    return () => { cancelAnimationFrame(anim); window.removeEventListener('resize', resize); };
   }, []);
 
   return (
-    <section
-      id="contact"
-      className={styles.contact}
-      ref={sectionRef}
-    >
-      {/* Pixel Background */}
+    <section id="contact" className={styles.contact} ref={sectionRef}>
       <canvas ref={canvasRef} className={styles.pixelCanvas} />
 
-      <h2 className={styles.heading}>Contact me on</h2>
+      <div className={styles.inner}>
 
-      <div className={styles.links}>
-        <a
-          href="mailto:sachiin051@gmail.com"
-          className={styles.button}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaEnvelope className={styles.icon} />
-          Email Me
-        </a>
+        {/* Main split layout */}
+        <div className={styles.split}>
 
-        <a
-          href="https://www.linkedin.com/in/sachiin-megarajan/"
-          className={styles.button}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaLinkedin className={styles.icon} />
-          LinkedIn
-        </a>
+          {/* LEFT — big text */}
+          <div className={styles.left}>
+            <p className={styles.eyebrow}>If you want to collaborate on a project,</p>
+            <h2 className={styles.headline}>Just drop a<br />Message.</h2>
+          </div>
 
-        <a
-          href="https://github.com/SACHHH05"
-          className={styles.button}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaGithub className={styles.icon} />
-          GitHub
-        </a>
+          {/* RIGHT — contact links */}
+          <div className={styles.right}>
+            {links.map((l, i) => (
+              <a
+                key={i}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.linkRow}
+              >
+                <span className={styles.linkLabel}>{l.label}</span>
+                <span className={styles.linkArrow}>→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer strip */}
+        <div className={styles.footer}>
+          <span className={styles.footerName}>Sachiin Megarajan</span>
+          <span className={styles.footerCenter}>© 2026</span>
+          <span className={styles.footerRight}>Built by Sachiin</span>
+        </div>
+
       </div>
     </section>
   );
