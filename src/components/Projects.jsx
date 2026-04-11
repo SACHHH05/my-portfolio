@@ -3,7 +3,7 @@ import { FaGithub, FaReact } from 'react-icons/fa';
 import { SiOpencv, SiAngular } from 'react-icons/si';
 import styles from './Projects.module.css';
 
-import clomoraImg from '../assets/climora.png';
+import clomoraImg from '../assets/Climora.png';
 import morpheusImg from '../assets/Morpheus.png';
 import portImg from '../assets/port.png';
 import voiceImg from '../assets/voice.png';
