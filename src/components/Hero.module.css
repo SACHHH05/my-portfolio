@@ -1,30 +1,121 @@
 .hero {
   height: 100vh;
-  background-color: #000000;
+  background-color:#FFFDF2;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(0, 0, 0, 0.03), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(140, 132, 114, 0.08), transparent 45%);
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+  padding: 6rem 4vw 2rem;
   position: relative;
+  overflow: hidden;
 }
 
 .content {
-  text-align: center;
+  max-width: 100%;
+  width: 100%;
 }
 
-.name {
-  font-size: 10rem;
-  color: #F2E6DC;
-  font-weight: 1000;
-  letter-spacing: 2px;
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #4e9a4e;
+  box-shadow: 0 0 10px 2px rgba(78, 154, 78, 0.5);
+  flex-shrink: 0;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+.badgeText {
+  font-family: 'BebasNeue', sans-serif;
+  letter-spacing: 1.5px;
+  font-size: 0.95rem;
+  color: #565449;
   text-transform: uppercase;
-  will-change: transform, opacity;
-  transition: all 0.3s ease;
-  font-family: 'BebasNeue',
+}
+
+.headline {
+  margin: 0;
+  font-family: 'BebasNeue', sans-serif;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: #1a1a16;
+}
+
+.line {
+  display: block;
+  font-size: clamp(3.5rem, 10vw, 10.5rem);
+  letter-spacing: 3px;
+}
+
+.lineIndent {
+  display: block;
+  font-size: clamp(3.5rem, 10vw, 10.5rem);
+  letter-spacing: 3px;
+  padding-left: 22%;
+}
+
+.script {
+  display: block;
+  font-family: 'Comforter', cursive;
+  text-transform: none;
+  color: #e08494;
+  font-size: clamp(4rem, 11vw, 11rem);
+  line-height: 0.95;
+  margin: 0.05em 0 0.3em;
+  padding-left: 0.15em;
+}
+
+.dotAccent {
+  display: inline-block;
+  width: 0.14em;
+  height: 0.14em;
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background-color: #e08494;
+  vertical-align: baseline;
+  transform: translateY(-0.05em);
+}
+
+.meta {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 6vw;
+  font-family: 'BebasNeue', sans-serif;
+  letter-spacing: 1.5px;
+  font-size: 0.9rem;
+  color: #8c8472;
+  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
-  .name {
-    font-size: 3rem;
+  .hero {
+    padding: 7rem 6vw 3rem;
+  }
+
+  .lineIndent {
+    padding-left: 0;
+  }
+
+  .badgeText {
+    font-size: 0.7rem;
+  }
+
+  .meta {
+    position: static;
+    margin-top: 2.5rem;
   }
 }

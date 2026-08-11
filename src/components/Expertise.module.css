@@ -1,73 +1,86 @@
 .expertise {
-  padding: 6rem 5rem 0;
-  background-color: #000000;
-  color: #ffffff;
-  text-align: left;
-  position: relative;
+  padding: 6rem 0 7rem;
+  background-color: #FFFDF2;
+  color: #1a1a16;
   overflow: hidden;
 }
 
+/* ================= HEADING ================= */
+
+.headingRow {
+  padding: 0 5rem;
+  margin-bottom: 3.5rem;
+}
+
 .heading {
-  font-size: 5rem;
-  color: #F2E6DC;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  color: #1a1a16;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 0.5rem;
-  text-align: left;
-  position: relative;
-  z-index: 1;
+  margin: 0;
+  line-height: 1;
 }
 
-.block {
-  margin-bottom: 3rem;
-  position: relative;
-  z-index: 1;
+.headingItalic {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #e08494;
 }
 
-.subheading {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  color: #F2E6DC;
-}
-
-.row {
+/* ================= KINETIC WALL ================= */
+.wall {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.skillItem {
+.rowWrap {
+  overflow: hidden;
+  
+  width: 100%;
+}
+
+.rowTrack {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background-color: #050504;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  color: #D8CFBC;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
+  width: max-content;
 }
 
-.skillItem:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 20px #F2E6DC;
+.rowItem {
+  display: inline-b;
+  white-space: nowrap;
+  font-family: 'BebasNeue', sans-serif;
+  letter-spacing: 1px;
 }
 
-.icon {
-  font-size: 2rem;
-  color: #565449;
+/* Row size tiers */
+
+.big .rowItem {
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  color: #1a1a16;
 }
 
-.pixelCanvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.4;
+.medium .rowItem {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  color: #e08494;
+  letter-spacing: 0;
 }
+
+.small .rowItem {
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  color: #8c8472;
+  font-weight: 500;
+}
+
+/* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
-  .expertise { padding: 6rem 1.5rem; }
-  .heading { font-size: 3rem; }
+  .expertise { padding: 5rem 0 5rem; }
+  .headingRow { padding: 0 1.5rem; }
+  .wall { gap: 0.3rem; }
 }

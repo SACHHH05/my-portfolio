@@ -1,21 +1,26 @@
-import { useEffect, useRef } from 'react';
-import styles from './Contact.module.css';
-import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { useEffect, useRef } from "react";
+import styles from "./Contact.module.css";
+import {
+  FaEnvelope,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
+import Reveal from "./Reveal";
 
 const links = [
   {
-    label: 'Gmail',
-    href: 'mailto:sachiin051@gmail.com',
+    label: "Gmail",
+    href: "mailto:sachiin051@gmail.com",
     icon: <FaEnvelope />,
   },
   {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/sachiin-megarajan/',
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/sachiin-megarajan/",
     icon: <FaLinkedin />,
   },
   {
-    label: 'GitHub',
-    href: 'https://github.com/SACHHH05',
+    label: "GitHub",
+    href: "https://github.com/SACHHH05",
     icon: <FaGithub />,
   },
 ];
@@ -26,13 +31,21 @@ export default function Contact() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const section = sectionRef.current;
+
+    if (!canvas || !section) return;
+
+    const ctx = canvas.getContext("2d");
+
     const resize = () => {
-      canvas.width = sectionRef.current.offsetWidth;
-      canvas.height = sectionRef.current.offsetHeight;
+      canvas.width = section.offsetWidth;
+      canvas.height = section.offsetHeight;
     };
+
     resize();
+
     const pixels = [];
+
     for (let i = 0; i < 90; i++) {
       pixels.push({
         x: Math.random() * canvas.width,
@@ -43,63 +56,128 @@ export default function Contact() {
         dx: (Math.random() - 0.5) * 0.2,
       });
     }
+
     let anim;
+
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pixels.forEach(p => {
-        p.y -= p.speed; p.x += p.dx;
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      pixels.forEach((p) => {
+        p.y -= p.speed;
+        p.x += p.dx;
+
         if (p.y < 0) p.y = canvas.height;
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
-        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
-        ctx.fillRect(p.x, p.y, p.size, p.size);
+
+        ctx.fillStyle = `rgba(26, 26, 22, ${p.alpha * 0.5})`;
+
+        ctx.fillRect(
+          p.x,
+          p.y,
+          p.size,
+          p.size
+        );
       });
+
       anim = requestAnimationFrame(animate);
     };
+
     animate();
-    window.addEventListener('resize', resize);
-    return () => { cancelAnimationFrame(anim); window.removeEventListener('resize', resize); };
+
+    window.addEventListener("resize", resize);
+
+    return () => {
+      cancelAnimationFrame(anim);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
   return (
-    <section id="contact" className={styles.contact} ref={sectionRef}>
-      <canvas ref={canvasRef} className={styles.pixelCanvas} />
+    <section
+      id="contact"
+      className={styles.contact}
+      ref={sectionRef}
+    >
+      <canvas
+        ref={canvasRef}
+        className={styles.pixelCanvas}
+      />
 
       <div className={styles.inner}>
-
         {/* Main split layout */}
         <div className={styles.split}>
 
-          {/* LEFT — big text */}
-          <div className={styles.left}>
-            <p className={styles.eyebrow}>If you want to collaborate on a project,</p>
-            <h2 className={styles.headline}>Just drop a<br />Message.</h2>
-          </div>
+          {/* Left */}
+          <Reveal className={styles.left}>
+            <p className={styles.eyebrow}>
+              If you want to collaborate on a project,
+            </p>
 
-          {/* RIGHT — contact links */}
+            <h2 className={styles.headline}>
+              Just drop a
+              <br />
+              Message.
+            </h2>
+          </Reveal>
+
+          {/* Right — contact links */}
           <div className={styles.right}>
             {links.map((l, i) => (
-              <a
+              <Reveal
                 key={i}
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.linkRow}
+                delay={0.08 * i}
               >
-                <span className={styles.linkLabel}>{l.label}</span>
-                <span className={styles.linkArrow}>→</span>
-              </a>
+                <a
+                  href={l.href}
+                  target={
+                    l.href.startsWith("mailto:")
+                      ? undefined
+                      : "_blank"
+                  }
+                  rel={
+                    l.href.startsWith("mailto:")
+                      ? undefined
+                      : "noopener noreferrer"
+                  }
+                  className={styles.linkRow}
+                >
+                  <span className={styles.linkLabel}>
+                    {l.icon}
+                    {l.label}
+                  </span>
+
+                  <span className={styles.linkArrow}>
+                    →
+                  </span>
+                </a>
+              </Reveal>
             ))}
           </div>
         </div>
 
-        {/* Footer strip */}
-        <div className={styles.footer}>
-          <span className={styles.footerName}>Sachiin Megarajan</span>
-          <span className={styles.footerCenter}>© 2026</span>
-          <span className={styles.footerRight}>Built by Sachiin</span>
-        </div>
+        {/* Footer */}
+        <Reveal
+          className={styles.footer}
+          delay={0.15}
+        >
+          <span className={styles.footerName}>
+            Sachiin Megarajan
+          </span>
 
+          <span className={styles.footerCenter}>
+            © 2026
+          </span>
+
+          <span className={styles.footerRight}>
+            Built by Sachiin
+          </span>
+        </Reveal>
       </div>
     </section>
   );

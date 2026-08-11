@@ -1,125 +1,99 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useAnimationFrame } from 'framer-motion';
 import styles from './Expertise.module.css';
-import {
-  FaPython, FaJava, FaJs, FaReact, FaDocker, FaGitAlt, FaCode
-} from 'react-icons/fa';
-import {
-  SiFlask, SiScikitlearn, SiOpencv, SiMongodb, SiMysql,
-  SiTensorflow, SiFastapi, SiPytorch, SiAngular,
-  SiBlender, SiStreamlit
-} from 'react-icons/si';
+import Reveal from './Reveal';
 
-export default function Expertise() {
-  const canvasRef = useRef(null);
-  const sectionRef = useRef(null);
+function wrap(min, max, v) {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
+}
+
+const lines = [
+  { text: 'PYTHON  ✦  PYTORCH  ✦  REACT  ✦  FASTAPI  ✦  COMPUTER VISION  ✦  ', speed: 40, tier: 'big' },
+  { text: 'TensorFlow · YOLOv8 · OpenCV · Docker · MCP · JavaScript · ', speed: 26, tier: 'medium' },
+  { text: 'FLASK  ✦  SCIKIT-LEARN  ✦  GIT  ✦  BLENDER  ✦  MYSQL  ✦  MONGODB  ✦  REACT NATIVE  ✦  ', speed: 52, tier: 'small' },
+];
+
+// Tracks scroll direction: +1 while scrolling down, -1 while scrolling up.
+// Keeps its last value when the page isn't actively scrolling, so the
+// marquee never just stops — it always keeps drifting one way or the other.
+function useScrollDirection() {
+  const directionRef = useRef(1);
+  const lastY = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const resize = () => {
-      canvas.width = sectionRef.current.offsetWidth;
-      canvas.height = sectionRef.current.offsetHeight;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY.current;
+      if (Math.abs(delta) > 0.5) {
+        directionRef.current = delta > 0 ? 1 : -1;
+      }
+      lastY.current = y;
     };
-    resize();
-    const pixels = [];
-    for (let i = 0; i < 110; i++) {
-      pixels.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        speed: Math.random() * 0.35 + 0.15,
-        alpha: Math.random() * 0.4 + 0.15,
-        dx: (Math.random() - 0.5) * 0.2,
-      });
-    }
-    let anim;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pixels.forEach(p => {
-        p.y -= p.speed; p.x += p.dx;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
-        ctx.fillRect(p.x, p.y, p.size, p.size);
-      });
-      anim = requestAnimationFrame(animate);
-    };
-    animate();
-    window.addEventListener('resize', resize);
-    return () => { cancelAnimationFrame(anim); window.removeEventListener('resize', resize); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  return directionRef;
+}
+
+function TickerLine({ text, speed, tier, directionRef }) {
+  const measureRef = useRef(null);
+  const [width, setWidth] = useState(0);
+  const x = useMotionValue(0);
+
+  useEffect(() => {
+    const measure = () => {
+      if (measureRef.current) setWidth(measureRef.current.offsetWidth);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [text]);
+
+  useAnimationFrame((t, delta) => {
+    if (!width) return;
+    const dir = directionRef.current;
+    const move = (speed * dir * delta) / 300; // px per frame, direction-aware
+    const next = wrap(-width, 0, x.get() - move);
+    x.set(next);
+  });
+
   return (
-    <section id="expertise" className={styles.expertise} ref={sectionRef}>
-      <canvas ref={canvasRef} className={styles.pixelCanvas} />
-
-      <h2 className={styles.heading}>Expertise</h2>
-
-      <div className={styles.block}>
-        <h3 className={styles.subheading}>Languages</h3>
-        <div className={styles.row}>
-          <Skill label="Python"     icon={<FaPython />} />
-          <Skill label="JavaScript" icon={<FaJs />} />
-          <Skill label="Java"       icon={<FaJava />} />
-          <Skill label="SQL"        icon={<SiMysql />} />
-        </div>
-      </div>
-
-      <div className={styles.block}>
-        <h3 className={styles.subheading}>Frameworks & Libraries</h3>
-        <div className={styles.row}>
-          <Skill label="React"           icon={<FaReact />} />
-          <Skill label="React Native"    icon={<FaReact />} />
-          <Skill label="FastAPI"         icon={<SiFastapi />} />
-          <Skill label="Flask"           icon={<SiFlask />} />
-          <Skill label="Angular"         icon={<SiAngular />} />
-          <Skill label="PyTorch"         icon={<SiPytorch />} />
-          <Skill label="TensorFlow"      icon={<SiTensorflow />} />
-          <Skill label="Scikit-learn"    icon={<SiScikitlearn />} />
-        </div>
-      </div>
-
-      <div className={styles.block}>
-        <h3 className={styles.subheading}>ML / CV</h3>
-        <div className={styles.row}>
-          <Skill label="OpenCV"          icon={<SiOpencv />} />
-          <Skill label="YOLOv8"          icon={<FaCode />} />
-          <Skill label="Grad-CAM"        icon={<FaCode />} />
-          <Skill label="faster-whisper"  icon={<FaCode />} />
-          <Skill label="Silero VAD"      icon={<FaCode />} />
-          <Skill label="EasyOCR"         icon={<SiOpencv />} />
-        </div>
-      </div>
-
-      <div className={styles.block}>
-        <h3 className={styles.subheading}>Tools</h3>
-        <div className={styles.row}>
-          <Skill label="Git"       icon={<FaGitAlt />} />
-          <Skill label="Docker"    icon={<FaDocker />} />
-          <Skill label="Blender"   icon={<SiBlender />} />
-          <Skill label="Streamlit" icon={<SiStreamlit />} />
-          <Skill label="Ollama"    icon={<FaCode />} />
-        </div>
-      </div>
-
-      <div className={styles.block}>
-        <h3 className={styles.subheading}>Databases</h3>
-        <div className={styles.row}>
-          <Skill label="MySQL"   icon={<SiMysql />} />
-          <Skill label="MongoDB" icon={<SiMongodb />} />
-        </div>
-      </div>
-
-    </section>
+    <div className={`${styles.rowWrap} ${styles[tier]}`}>
+      <motion.div className={styles.rowTrack} style={{ x }}>
+        <span className={styles.rowItem} ref={measureRef}>{text}</span>
+        <span className={styles.rowItem} aria-hidden="true">{text}</span>
+        <span className={styles.rowItem} aria-hidden="true">{text}</span>
+      </motion.div>
+    </div>
   );
 }
 
-function Skill({ label, icon }) {
+export default function Expertise() {
+  const directionRef = useScrollDirection();
+
   return (
-    <div className={styles.skillItem}>
-      <span className={styles.icon}>{icon}</span>
-      <span>{label}</span>
-    </div>
+    <section id="expertise" className={styles.expertise}>
+      <Reveal>
+        <div className={styles.headingRow}>
+          <h2 className={styles.heading}>
+            CORE <span className={styles.headingItalic}>STACK</span>
+          </h2>
+        </div>
+      </Reveal>
+
+      <div className={styles.wall}>
+        {lines.map((line) => (
+          <TickerLine
+            key={line.text}
+            text={line.text}
+            speed={line.speed}
+            tier={line.tier}
+            directionRef={directionRef}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

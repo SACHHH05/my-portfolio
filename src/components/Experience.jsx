@@ -1,44 +1,44 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './Experience.module.css';
+import Reveal from './Reveal';
 
 const experiences = [
   {
-    date: 'Oct 2025 – Dec 2025',
+    date: 'Feb 2026 – Jul 2026',
+    duration: '6 months',
+    role: 'Project Intern',
+    company: 'Payoda',
+    desc: 'Built a complete e-commerce backend with FastAPI, and a WebSocket-based real-time speech transcription pipeline using faster-whisper at zero API cost. Architected a multi-agent AI system optimizing LLM token usage across distributed workflows, plus Playwright automation for internal testing tools.',
+  },
+  {
+    date: 'Oct 2025 – Nov 2025',
     duration: '2 months',
     role: 'Research Intern',
     company: 'Providence University, Taiwan',
-    desc: 'Worked on a pneumonia detection research project using deep learning and computer vision. Focused on improving model accuracy and integrating Grad-CAM visualizations for explainability.',
+    desc: 'Trained a CNN-based pneumonia classifier on 7,750 chest X-ray images — 92.44% accuracy, 0.94 F1-score. Integrated Grad-CAM heatmaps for interpretable diagnostics and generated automated PDF medical reports. Published the work at an All India AI seminar.',
   },
   {
-    date: 'July 2025',
-    duration: '1 month',
-    role: 'Intern',
+    date: 'Jul 2025 – Aug 2025',
+    duration: '2 months',
+    role: 'Software Developer Intern',
     company: 'Zettaone Technologies',
-    desc: 'Worked on real-world AI applications — built Climora (weather + soil insights), VISYRE (OCR pipeline), and other production-level tools.',
+    desc: 'Built a YOLOv8 + EasyOCR pipeline for real-time PCB defect detection in production. Shipped VISYRE (React Native + Flask) for OCR/barcode scanning, and Climora, a cross-platform weather + soil insights app.',
   },
   {
-    date: '2024 – Present',
+    date: '2025 – Present',
     duration: 'Ongoing',
-    role: 'Research & Projects',
-    company: 'Independent',
-    desc: 'Morpheus — AI-powered Blender scene generator (React + FastAPI + Claude API). Real-time Voice Transcription engine using faster-whisper + Silero VAD. Pneumonia detection research with Grad-CAM explainability.',
+    role: 'Independent Research & Projects',
+    company: 'Self-directed',
+    desc: 'Morpheus — an MCP server letting a local LLM control Blender via natural language. VoiceScript — self-hosted real-time speech transcription with sub-second latency.',
   },
 ];
 
-const education = [
-  {
-    date: '2023 – 2027',
-    degree: 'B.E — CSE (AI & ML)',
-    school: 'KPR Institute of Engineering and Technology',
-    location: 'Coimbatore, Tamil Nadu',
-  },
-  {
-    date: '2011 – 2023',
-    degree: 'CBSE — Secondary Education',
-    school: 'Sri Vijay Vidyashram CBSE School',
-    location: 'Dharmapuri, Tamil Nadu',
-  },
-];
+const education = {
+  date: '2023 – 2027',
+  degree: 'B.E — Computer Science & Engineering (AI & ML)',
+  school: 'KPR Institute of Engineering and Technology',
+  location: 'Coimbatore, Tamil Nadu',
+};
 
 function Timeline({ items, renderLeft, renderRight }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -156,7 +156,7 @@ export default function Experience() {
         if (p.y < 0) p.y = canvas.height;
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
-        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+        ctx.fillStyle = `rgba(26,26,22,${p.alpha * 0.4})`;
         ctx.fillRect(p.x, p.y, p.size, p.size);
       });
       anim = requestAnimationFrame(animate);
@@ -170,9 +170,12 @@ export default function Experience() {
     <section id="experience" className={styles.experience} ref={sectionRef}>
       <canvas ref={canvasRef} className={styles.pixelCanvas} />
 
-      <div className={styles.inner}>
-
-        <h2 className={styles.heading}>Experience</h2>
+      <Reveal>
+          <div className={styles.headingRow}>
+            <h2 className={styles.heading}>Experience</h2>
+            <span className={styles.headingRange}>( 2025 — Present )</span>
+          </div>
+        </Reveal>
 
         <Timeline
           items={experiences}
@@ -186,30 +189,27 @@ export default function Experience() {
             <>
               <span className={styles.entryRole}>{e.role}</span>
               <span className={styles.entryCompany}>{e.company}</span>
-              {active && <p className={styles.entryDesc}>{e.desc}</p>}
+              <p className={styles.entryDesc}>{e.desc}</p>
             </>
           )}
         />
 
-        <h2 className={`${styles.heading} ${styles.headingEdu}`}>Education</h2>
+        <Reveal>
+          <div className={`${styles.headingRow} ${styles.headingRowEdu}`}>
+            <h2 className={styles.heading}>Education</h2>
+            <span className={styles.headingRange}>( {education.date} )</span>
+          </div>
+        </Reveal>
 
-        <Timeline
-          items={education}
-          renderLeft={(e) => (
-            <>
-              <span className={styles.entryDate}>{e.date}</span>
-              <span className={styles.entryDuration}>{e.location}</span>
-            </>
-          )}
-          renderRight={(e, active) => (
-            <>
-              <span className={styles.entryRole}>{e.degree}</span>
-              <span className={styles.entryCompany}>{e.school}</span>
-            </>
-          )}
-        />
+        <Reveal delay={0.1}>
+          <div className={styles.eduBlock}>
+            <h3 className={styles.eduDegree}>{education.degree}</h3>
+            <span className={styles.eduSchool}>
+              {education.school}, {education.location}
+            </span>
+          </div>
+        </Reveal>
 
-      </div>
     </section>
   );
 }
