@@ -18,8 +18,8 @@ const experiences = [
     desc: 'Trained a CNN-based pneumonia classifier on 7,750 chest X-ray images — 92.44% accuracy, 0.94 F1-score. Integrated Grad-CAM heatmaps for interpretable diagnostics and generated automated PDF medical reports. Published the work at an All India AI seminar.',
   },
   {
-    date: 'Jul 2025 – Aug 2025',
-    duration: '2 months',
+    date: 'Jul 2025',
+    duration: '1 months',
     role: 'Software Developer Intern',
     company: 'Zettaone Technologies',
     desc: 'Built a YOLOv8 + EasyOCR pipeline for real-time PCB defect detection in production. Shipped VISYRE (React Native + Flask) for OCR/barcode scanning, and Climora, a cross-platform weather + soil insights app.',
