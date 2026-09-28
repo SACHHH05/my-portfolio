@@ -157,6 +157,7 @@ export default function Navbar() {
           </a>
         </li>
 
+
         <li>
           <a href="#projects">
             <TextRoll>Projects</TextRoll>
