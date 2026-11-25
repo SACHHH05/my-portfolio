@@ -1,28 +1,31 @@
 # Sachiin's Portfolio
 
-Hey! I'm **Sachiin**, an AI & Full Stack developer from Coimbatore, and this is my personal portfolio site — built using **React + Vite**. It's a space where I showcase the projects I've built, the skills I'm sharpening, and the tech I vibe with. 
+A single-page portfolio for Sachiin Megarajan, built with React and Vite. It showcases selected projects, experience, education, technical skills, and contact links.
 
----
+## Stack
 
-## Tech Stack
+- React 19 and Vite
+- CSS Modules and global CSS
+- GSAP with ScrollTrigger and Lenis for scroll-linked animation and smooth scrolling
+- Framer Motion for component and interaction animations
+- React Icons for contact icons
+- Local font files and Google Fonts
 
--  **Vite** – lightning-fast bundler
--  **React** – frontend library
--  **Tailwind CSS** – for clean, minimal design
--  **GSAP** – for smooth scroll-triggered animations
--  **Google Fonts** – Poppins, Fjalla One
--  **Deployed on** [Vercel](https://vercel.com)
+## Features
 
----
+- Responsive portfolio sections with in-page navigation
+- Animated multilingual preloader and hero entrance
+- Project list with desktop hover previews
+- Experience timeline and animated skills ticker
+- Resume, GitHub, LinkedIn, and email links
 
-##  Features
+## Run locally
 
--  Interactive sections & responsive design
--  Mobile-first layout
--  Clean project showcase
--  Scroll animations with GSAP
--  Personal bio, contact info, and more
+```bash
+npm install
+npm run dev
+```
 
----
+Other scripts: `npm run build`, `npm run preview`, and `npm run lint`.
 
 

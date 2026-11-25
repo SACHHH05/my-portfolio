@@ -10,7 +10,7 @@ function wrap(min, max, v) {
 
 const lines = [
   { text: 'PYTHON  ✦  PYTORCH  ✦  REACT  ✦  FASTAPI  ✦  COMPUTER VISION  ✦  ', speed: 40, tier: 'big' },
-  { text: 'TensorFlow · YOLOv8 · OpenCV · Docker · MCP · JavaScript · ', speed: 26, tier: 'medium' },
+  { text: 'TensorFlow · YOLOv8 · OpenCV · MCP · JavaScript · ', speed: 26, tier: 'medium' },
   { text: 'FLASK  ✦  SCIKIT-LEARN  ✦  GIT  ✦  BLENDER  ✦  MYSQL  ✦  MONGODB  ✦  REACT NATIVE  ✦  ', speed: 52, tier: 'small' },
 ];
 
